@@ -1,0 +1,34 @@
+### Events in game
+
+	[EVENT:st001]
+[PLAYER]
+What is happening ? Hmm ? Who thought it will be good idea to be here ?
+Damn......      I wish i had comfy clothes.
+[GILFORD]
+I said to you earlier it will be cold.
+[PLAYER]
+Sod off ! I never thought it will be THIS cold !...
+[GILFORD]
+Either way we need to move. They are still close and our tracks are visible clear as day.
+
+	[EVENT:st002]
+[GILFORD]
+I think we are getting into ambush. We should change our course.
+[PERKEL]
+What ambush !?
+[GILFORD]
+Look at way ahead. Road is easily visible and on each sides
+there are thick bushes that can hide even balista in them.
+[GILFORD]
+We should go through woods instead of using this road.
+It will be much safer this way.
+[PLAYER]
+But it will slow as down.
+[GILFORD]
+Yes, but i think you wouldn't want to earn a bolt in your ass.
+[PLAYER]
+...
+[PLAYER]
+No i wouldn't...
+[GILFORD]
+Then let us go through the woods.
