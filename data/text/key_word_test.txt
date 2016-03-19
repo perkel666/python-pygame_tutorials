@@ -1,4 +1,13 @@
-### Events in game
+### Events in game, game doesn't mind if text is badly formated
+### but formating help reading later
+### 
+### FORMATING:
+### 		event
+###
+###	speaker
+###	
+###text
+###
 
 		[EVENT:st001]
 
