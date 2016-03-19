@@ -1,6 +1,7 @@
 import pygame
 from pygame import Surface
 from pygame.locals import *
+import textwrap
 # Todo: remove font object from TextLine() , to TextWall(). Then share a list of font's with any line.
 
 """Example of multi-line text class, with alpha transparency."""
@@ -139,11 +140,20 @@ class Game():
         pygame.init()
         self.screen = pygame.display.set_mode ((1280, 720))
         self.text = Surface([200, 100])
+        crs = open("data/text/text_case.txt", "r")
+        text_page = crs.read()
+        text_page = textwrap.wrap(text_page, width=50)
+        new_page = ''
+        print text_page
+        print "-----------"
 
-        self.text_wall = TextWall(30)
+        new_page = new_page.join(text_page)
+        print "-----------"
+        print new_page
+        self.text_wall = TextWall(12)
         self.toggle_bg = True
 
-        self.text_wall.parse_text(lorem)
+        #self.text_wall.parse_text(text_page)
 
     def loop(self):
         while not self.done:
