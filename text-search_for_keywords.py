@@ -49,25 +49,18 @@ class GameTextEvents():
         print "====WHOLE FILE END======"
         print ""
 
-    def get_events_list(self, print_list=False):
+    def get_events_list(self):
         """
-        :param print_list: prints all events in text file
         :return: tuple of event and line number
         """
-        event_list = []
 
+        event_list = []
         line_number = 0
         for line in self.parsed_whole_event_text_file:
             line_number += 1
             if "EVENT" in line:
                 event = TextHandling.find_text_between_brackets(line)
                 event_list.append((event, line_number))
-
-        if print_list is True:
-            print "===EVENTS LIST========="
-            for event in event_list:
-                print event[0]
-            print "===EVENTS LIST END====="
 
         return event_list
 
@@ -91,6 +84,7 @@ class GameTextEvents():
         next_event = None
         event_content = []
 
+        # get where event starts and ends
         count = -1  # -1 because i need to get over list starting with 0 twice so -1 and not 0
         for event in events:
             count += 1
@@ -101,23 +95,76 @@ class GameTextEvents():
         print_end = events[next_event]
         print_end = print_end[1]-1
 
+        # put lines from event into list
         count = 0
         for line in self.parsed_whole_event_text_file:
             count += 1
             if print_start <= count <= print_end:
                 event_content.append(line)
 
+        # figure out who is participating in event
+        speaker_list = []
+        for text_line in event_content:
+            if "SPEAKER" in text_line:
+                speaker_list.append(text_line)
+
+        # removing duplikates from speaker list
+        speaker_list = list(set(speaker_list))
+
+        event_content = (speaker_list, event_content)
         return event_content
+
+    def create_event_objects_list(self):
+
+        event_objects_list = []
+        for event in self.event_list:
+            if "EVENT:END" not in event[0]:
+                scratch_event = self.event_content(event[0])
+                event_object = Event(event, scratch_event[0], scratch_event[1])
+                event_objects_list.append(event_object)
+                print event_object
+            else:
+                pass
+        print event_objects_list
+        return event_objects_list
+
+
+class Event():
+    def __init__(self, name, participants, event_text):
+        self.name = name[0]
+        self.starts_at_line = name[1]
+        self.participants = participants
+        self.event_text = event_text
+
+    def print_event_to_cosnsole(self):
+        print ""
+        print "=================="
+        print "EVENT NAME : "+self.name
+        print "EVENT PARTICIPANTS : "
+        print "------------------"
+        for participant in self.participants:
+            print participant
+        print "------------------"
+        print "EVENT TEXT :"
+        print "------------------"
+        for line in self.event_text:
+            print line
+        print "------------------"
+        print "=================="
 
 
 text01 = TextHandling.get_text("data/text/key_word_test.txt")
 events_file = GameTextEvents(text01)
 
+events_object_list = events_file.create_event_objects_list()
 
 #for event in events_file.event_list:
 #    print event[0]
 
-#for line in  events_file.event_content("st001"):
-#    print line
+#for linex in events_file.event_content("st001"):
+#    print linex
 
 #events_file.print_text()
+
+for event in events_object_list:
+    event.print_event_to_cosnsole()
