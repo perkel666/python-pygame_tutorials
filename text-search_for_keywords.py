@@ -5,8 +5,12 @@ import re
 
 class TextHandling():
 
+    """
+    General class to handle text
+    """
+
     @ staticmethod
-    def get_text(filepath):
+    def get_text_from_file(filepath):
         opened_file = open(filepath, "r")
         text = opened_file.read().split('\n')
         return text
@@ -35,6 +39,8 @@ class TextHandling():
 class GameTextEvents():
     def __init__(self, text):
         """
+        This class operates on text variable, it provides support to create list of event objects that
+        later can be used to make game events with text.
         :param text: accepts list with strings of text
         """
         self.unparsed_text = text
@@ -85,7 +91,7 @@ class GameTextEvents():
         event_content = []
 
         # get where event starts and ends
-        count = -1  # -1 because i need to get over list starting with 0 twice so -1 and not 0
+        count = -1
         for event in events:
             count += 1
             if event_name in event[0]:
@@ -130,13 +136,16 @@ class GameTextEvents():
 
 
 class Event():
+    """
+    This class creates event object with data that can be later on extracted for use in game events.
+    """
     def __init__(self, name, participants, event_text):
         self.name = name[0]
         self.starts_at_line = name[1]
         self.participants = participants
         self.event_text = event_text
 
-    def print_event_to_cosnsole(self):
+    def print_event_to_console(self):
         print ""
         print "=================="
         print "EVENT NAME : "+self.name
@@ -153,7 +162,7 @@ class Event():
         print "=================="
 
 
-text01 = TextHandling.get_text("data/text/key_word_test.txt")
+text01 = TextHandling.get_text_from_file("data/text/key_word_test.txt")
 events_file = GameTextEvents(text01)
 
 events_object_list = events_file.create_event_objects_list()
@@ -167,4 +176,4 @@ events_object_list = events_file.create_event_objects_list()
 #events_file.print_text()
 
 for event in events_object_list:
-    event.print_event_to_cosnsole()
+    event.print_event_to_console()
