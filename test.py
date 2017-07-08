@@ -1,9 +1,13 @@
 __author__ = 'Perkel'
 
+input_text = ''
 
-x = float(12)
-y = 20
 
-k = x / y
+input_text += '2'
 
-print k
+print input_text
+
+input_text = 'Valvatorez'
+input_text = input_text[0:-1]
+
+print input_text
